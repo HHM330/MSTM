@@ -1,0 +1,82 @@
+seed: 1234
+torch_home: 
+
+exam_dir: output/DFD/data_DFD 
+
+transform_params:
+  image_size: 224
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  data_augmentation:
+    - type: RandomRotation
+      degrees: [-10, 10]
+      probability: 0.5
+    - type: RandomBrightnessContrast
+      brightness_range: [0.5, 1.5]
+      contrast_range: [0.5, 1.5]
+      probability: 0.5
+    - type: FancyPCA
+      probability: 0.5
+    - type: RandomHSV
+      hue_range: [-0.1, 0.1]
+      saturation_range: [0.5, 1.5]
+      value_range: [0.5, 1.5]
+      probability: 0.5
+    - type: ImageCompression
+      quality_range: [10, 95]
+      probability: 0.5
+
+train:
+  batch_size: 10
+  num_workers: 8
+  pin_memory: False
+  print_info_step_freq: 1
+  max_epoches: 30
+  use_warmup: True
+  warmup_epochs: 1
+  dataset:
+    name: DFD_Dataset
+    params:
+      root: data/DFD
+      face_info_path: data/dfd_face_rects.pkl
+      split: train
+      num_segments: 8
+      sparse_span: 150
+      transform: transform_params 
+
+test:
+  batch_size: 10
+  num_workers: 8
+  pin_memory: False
+  dataset:
+    name: DFD_Dataset
+    params:
+      root: data/DFD
+      face_info_path: data/dfd_face_rects.pkl
+      split: test
+      num_segments: 8
+      sparse_span: 150
+
+model:
+  name: MSTM
+  params:
+    num_class: 2
+    num_segment: 8
+  resume: 
+  only_resume_model: False
+  not_resume_layer_names:
+
+optimizer:
+  name: Adam
+  params:
+    lr: 0.0002
+    weight_decay: 1.0e-5 
+
+loss:
+  name: CrossEntropyLoss
+  params:
+
+scheduler:
+  name: piecewise
+  decay_epochs: [5, 20]
+  decay_rates: [0.1, 0.05]
