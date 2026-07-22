@@ -21,7 +21,7 @@ class MSTM(nn.Module):
         self.add_softmax = add_softmax
         self.build_model1()
         self.build_model2()
-        self.weight_layer = nn.Linear(4, 2)
+        self.weight_layer = nn.Linear(4, 2) 
 
     def build_model1(self):
         self.base_model1 = TB(self.num_segment)
