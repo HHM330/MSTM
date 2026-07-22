@@ -22,8 +22,6 @@ class MSTM(nn.Module):
         self.build_model1()
         self.build_model2()
         self.weight_layer = nn.Linear(4, 2)
-        self.bayesian_combination(output_model1=torch.zeros((8, 2)), output_model2=torch.zeros((8, 2)))
-        self.bayes_fusion = self.LearnableBayesFusion(init_w=0.9)
 
     def build_model1(self):
         self.base_model1 = TB(self.num_segment)
