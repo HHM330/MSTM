@@ -3,7 +3,7 @@ torch_home:
 
 method: Deepfakes  #  ['Deepfakes', 'Face2Face', 'FaceSwap', 'NeuralTextures']
 compression: c23    #  ['c23', 'c40']
-exam_dir: output/ffpp/通用领域/data_${method}_${compression}
+exam_dir: output/ffpp/data_${method}_${compression}
 
 transform_params:
   image_size: 224
