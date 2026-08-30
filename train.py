@@ -25,7 +25,7 @@ from metrics_plotter import MetricsPlotter
 args = get_params()
 setup(args)
 init_exam_dir(args)
-os.environ["NO_ALBUMENTATIONS_UPDATE"] = "1" #禁用版本检查
+os.environ["NO_ALBUMENTATIONS_UPDATE"] = "1" 
 
 
 def main():
